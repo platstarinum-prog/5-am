@@ -6,17 +6,17 @@ media_folder: "public/uploads"
 public_folder: "/uploads"
 
 collections:
-  # 1. КАТАЛОГ ТОВАРОВ (ПОД ТВОЮ ПАПКУ В SRC)
+  # 1. КАТАЛОГ ТОВАРІВ (FOLDER-КОЛЛЕКЦИЯ)
   - name: "products"
     label: "Каталог товарів"
-    folder: "src/data/products" # Путь ровно как на твоем скриншоте
+    folder: "src/data/products"
     create: true
     extension: "json"
     format: "json"
-    slug: "{{fields.id}}" # Имя файла будет создаваться по ID товара (например: yeezy-700.json)
+    slug: "{{fields.id}}"
     summary: "{{fields.brand}} - {{fields.name}}"
     fields:
-      - { name: "id", label: "ID / Имя файла (без .json)", widget: "string" }
+      - { name: "id", label: "ID / Ім'я файлу (без .json)", widget: "string" }
       - { name: "name", label: "Назва товару", widget: "string" }
       - { name: "brand", label: "Бренд", widget: "string" }
       - { name: "price", label: "Ціна (грн)", widget: "number", value_type: "int" }
@@ -26,12 +26,14 @@ collections:
         options: ["Одяг", "Взуття", "Аксесуари"]
       - { name: "sizes", label: "Розміри", widget: "string" }
       - name: "condition"
-        label: "Стан", widget: "select", options: ["Відмінний", "Б/У"]
+        label: "Стан"
+        widget: "select"
+        options: ["Відмінний", "Б/У"]
       - { name: "seller_tg", label: "Telegram менеджера (без @)", widget: "string" }
       - { name: "imageUrl", label: "Фото товару", widget: "image" }
       - { name: "sold", label: "Товар продано?", widget: "boolean", default: false }
 
-  # 2. ОСТАЛЬНЫЕ СТРАНИЦЫ (Хранятся в public/data)
+  # 2. КОНТЕНТ СТОРІНОК (FILES-КОЛЛЕКЦИЯ)
   - name: "site_content"
     label: "Контент сторінок"
     delete: false
