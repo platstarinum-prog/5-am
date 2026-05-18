@@ -1,27 +1,40 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-interface HomeContent {
+interface LangContent {
   heroTitle: string;
   heroSubtitle: string;
   ctaText: string;
 }
 
+interface HomeData {
+  uk: LangContent;
+  ru: LangContent;
+}
+
 export default function HomePage() {
-  const [content, setContent] = useState<HomeContent | null>(null);
+  const [allContent, setAllContent] = useState<HomeData | null>(null);
+  const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'uk');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('/data/home.json')
       .then((res) => res.json())
       .then((data) => {
-        setContent(data);
+        setAllContent(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error('Помилка завантаження контенту головної сторінки:', err);
+        console.error('Помилка завантаження контенту:', err);
         setLoading(false);
       });
+
+    const handleLangUpdate = () => {
+      setLang(localStorage.getItem('lang') || 'uk');
+    };
+
+    window.addEventListener('languageChange', handleLangUpdate);
+    return () => window.removeEventListener('languageChange', handleLangUpdate);
   }, []);
 
   if (loading) {
@@ -34,6 +47,8 @@ export default function HomePage() {
     );
   }
 
+  const currentContent = allContent ? allContent[lang as 'uk' | 'ru'] : null;
+
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center text-center px-6 selection:bg-white selection:text-black">
       <div className="max-w-3xl">
@@ -41,16 +56,16 @@ export default function HomePage() {
           WELCOME TO 5AM
         </p>
         <h1 className="text-white font-black text-5xl md:text-8xl tracking-tighter uppercase leading-none mb-6">
-          {content?.heroTitle || '5AM STORE'}
+          {currentContent?.heroTitle || '5AM STORE'}
         </h1>
         <p className="text-zinc-400 text-sm md:text-base font-medium max-w-md mx-auto mb-10 leading-relaxed">
-          {content?.heroSubtitle || 'Преміальний дроп та аксесуари. Оновлення каталогу щотижня.'}
+          {currentContent?.heroSubtitle || 'Преміальний дроп та аксесуари. Оновлення каталогу щотижня.'}
         </p>
         <Link
           to="/catalog"
           className="inline-block bg-white text-black text-xs md:text-sm font-bold uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-zinc-200 transition-all duration-300 transform hover:-translate-y-0.5"
         >
-          {content?.ctaText || 'Перейти до каталогу'}
+          {currentContent?.ctaText || 'Перейти до каталогу'}
         </Link>
       </div>
     </div>
