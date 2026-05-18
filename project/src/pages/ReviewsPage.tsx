@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Reviews from '../components/Reviews';
 
-// Создаем интерфейс для отзыва, чтобы TypeScript не ругался
 export interface ReviewItem {
   text: string;
   author: string;
@@ -37,7 +36,8 @@ export default function ReviewsPage() {
 
   return (
     <div className="max-w-screen-xl mx-auto px-6 pt-24 pb-16">
-      <Reviews items={reviews} />
+      {/* Поменял items={} на reviews={} */}
+      <Reviews reviews={reviews} />
     </div>
   );
 }
