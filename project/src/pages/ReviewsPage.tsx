@@ -1,21 +1,15 @@
 import { useState, useEffect } from 'react';
 import Reviews from '../components/Reviews';
 
-export interface ReviewItem {
-  text: string;
-  author: string;
-  item: string;
-}
-
 export default function ReviewsPage() {
-  const [reviews, setReviews] = useState<ReviewItem[]>([]);
+  const [reviews, setReviews] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/data/reviews.json')
+    fetch('/data/reviews.json', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
-        setReviews(data);
+        setReviews(data.reviews || []);
         setLoading(false);
       })
       .catch((err) => {
@@ -36,7 +30,6 @@ export default function ReviewsPage() {
 
   return (
     <div className="max-w-screen-xl mx-auto px-6 pt-24 pb-16">
-      {/* Поменял items={} на reviews={} */}
       <Reviews reviews={reviews} />
     </div>
   );
