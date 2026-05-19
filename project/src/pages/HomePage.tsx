@@ -1,17 +1,8 @@
 import { Link } from 'react-router-dom';
-// Импортируем JSON напрямую. 
-// Если файла ещё нет в проекте, создай пустой файл `src/data/home.json` со значением {} внутри
 import homeData from '../data/home.json';
 
-interface HomeContent {
-  heroTitle?: string;
-  heroSubtitle?: string;
-  ctaText?: string;
-}
-
 export default function HomePage() {
-  // Используем данные из импорта, а если их нет — подставятся дефолтные значения ниже
-  const content: HomeContent = homeData || {};
+  const content = (homeData as any)?.home_page ?? homeData ?? {};
 
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center text-center px-6 selection:bg-white selection:text-black">
