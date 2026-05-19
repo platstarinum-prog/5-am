@@ -1,20 +1,18 @@
 backend:
   name: git-gateway
+  repo: ТВОЙ_НИК_НА_GITHUB/НАЗВАНИЕ_РЕПОЗИТОРИЯ # ОБЯЗАТЕЛЬНО УКАЖИ ЭТО
   branch: main
 
-local_backend: true
-
-# Чистые пути локального проекта
+# Указываем пути строго от корня репозитория (без всяких project/)
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
 format: "json"
 
 collections:
-  # 1. КАТАЛОГ ТОВАРОВ
   - name: "products"
     label: "Каталог товаров"
-    folder: "src/data/products" # строго в твою папку с json-файлами
+    folder: "src/data/products"
     create: true
     slug: "{{slug}}"
     fields:
@@ -23,24 +21,18 @@ collections:
       - { label: "Бренд", name: "brand", widget: "string", default: "5AM" }
       - { label: "Цена", name: "price", widget: "number", value_type: "int" }
       - { label: "Изображение товара", name: "image", widget: "image" }
-      - { label: "Размеры (например: S, M, L)", name: "sizes", widget: "string", default: "S, M, L, XL" }
-      - { label: "Telegram продавца", name: "seller_tg", widget: "string", default: "5am_store_official" }
-      - { label: "Состояние вещи", name: "condition", widget: "string", default: "New", required: false }
+      - { label: "Размеры", name: "sizes", widget: "string", default: "S, M, L, XL" }
+      - { label: "Telegram", name: "seller_tg", widget: "string", default: "5am_store_official" }
+      - { label: "Состояние", name: "condition", widget: "string", default: "New" }
       - { label: "Продано", name: "sold", widget: "boolean", default: false }
 
-  # 2. НАСТРОЙКИ FAQ
-  - name: "data_lists"
-    label: "Списки и настройки"
-    files:
-      - file: "src/data/faq.json"
-        label: "Часто задаваемые вопросы (FAQ)"
-        name: "faq"
+  - name: "faq"
+    label: "Часто задаваемые вопросы"
+    file: "src/data/faq.json"
+    fields:
+      - name: "items"
+        label: "Вопросы"
+        widget: "list"
         fields:
-          - name: "items"
-            label: "Вопросы и ответы"
-            widget: "list"
-            fields:
-              - { label: "Вопрос (RU)", name: "question_ru", widget: "string" }
-              - { label: "Ответ (RU)", name: "answer_ru", widget: "text" }
-              - { label: "Вопрос (UA/EN)", name: "question_en", widget: "string", required: false }
-              - { label: "Ответ (UA/EN)", name: "answer_en", widget: "text", required: false }
+          - { label: "Вопрос", name: "question_ru", widget: "string" }
+          - { label: "Ответ", name: "answer_ru", widget: "text" }
