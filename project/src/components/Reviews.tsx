@@ -1,56 +1,56 @@
-export interface Review {
-  text: string;
-  author: string;
-  item: string;
-}
+backend:
+  name: git-gateway
+  branch: main # Переименуй в master, если основная ветка называется так
 
-interface Props {
-  reviews: Review[];
-}
+local_backend: true
 
-const STARS = [1, 2, 3, 4, 5];
+media_folder: "project/public/images/uploads"
+public_folder: "/images/uploads"
 
-export default function Reviews({ reviews }: Props) {
-  return (
-    <div>
-      <div className="mb-10">
-        <p className="text-zinc-600 font-mono text-xs tracking-widest uppercase mb-3">ВІДГУКИ</p>
-        <div className="flex items-baseline gap-4">
-          <h1 className="text-white font-black text-5xl md:text-6xl tracking-tight leading-none">
-            Що кажуть
-          </h1>
-          <span className="text-zinc-600 font-mono text-sm">{reviews.length} відгуків</span>
-        </div>
-      </div>
+format: "json"
 
-      <div className="grid md:grid-cols-2 gap-4">
-        {reviews.map((review, i) => (
-          <div
-            key={i}
-            className="bg-zinc-950 border border-zinc-800/80 rounded-xl p-6 flex flex-col gap-4 hover:border-zinc-700 transition-colors"
-          >
-            <div className="flex gap-0.5">
-              {STARS.map(s => (
-                <svg key={s} width="14" height="14" viewBox="0 0 24 24" fill="#fff" className="opacity-90">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              ))}
-            </div>
+collections:
+  # 1. КОЛЛЕКЦИЯ ДЛЯ КАТАЛОГА ТОВАРОВ
+  - name: "products"
+    label: "Каталог товаров"
+    folder: "project/src/data/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "ID товара", name: "id", widget: "string" }
+      - { label: "Название (RU)", name: "title_ru", widget: "string" }
+      - { label: "Название (UA/EN)", name: "title_en", widget: "string", required: false }
+      - { label: "Цена", name: "price", widget: "number", value_type: "int" }
+      - { label: "Изображение товара", name: "image", widget: "image" }
+      - { label: "Описание (RU)", name: "description_ru", widget: "text" }
+      - { label: "Описание (UA/EN)", name: "description_en", widget: "text", required: false }
+      - { label: "В наличии", name: "inStock", widget: "boolean", default: true }
 
-            <p className="text-zinc-300 text-sm leading-relaxed flex-1">{review.text}</p>
+  # 2. ФАЙЛЫ ДЛЯ ОТЗЫВОВ И FAQ
+  - name: "data_lists"
+    label: "Списки и настройки"
+    files:
+      - file: "project/src/data/reviews.json"
+        label: "Отзывы клиентов"
+        name: "reviews"
+        fields:
+          - name: "items"
+            label: "Список отзывов"
+            widget: "list"
+            fields:
+              - { label: "Имя автора", name: "author", widget: "string" }
+              - { label: "Что купил (Вещь)", name: "item", widget: "string" }
+              - { label: "Отзыв (Текст)", name: "text", widget: "text" }
 
-            <div className="border-t border-zinc-800/60 pt-4 flex items-center justify-between">
-              <div>
-                <p className="text-white font-semibold text-sm">{review.author}</p>
-                <p className="text-zinc-600 font-mono text-xs">{review.item}</p>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-zinc-800 flex items-center justify-center text-xs font-bold text-white">
-                {review.author.charAt(0)}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+      - file: "project/src/data/faq.json"
+        label: "Часто задаваемые вопросы (FAQ)"
+        name: "faq"
+        fields:
+          - name: "items"
+            label: "Вопросы и ответы"
+            widget: "list"
+            fields:
+              - { label: "Вопрос (RU)", name: "question_ru", widget: "string" }
+              - { label: "Ответ (RU)", name: "answer_ru", widget: "text" }
+              - { label: "Вопрос (UA/EN)", name: "question_en", widget: "string", required: false }
+              - { label: "Ответ (UA/EN)", name: "answer_en", widget: "text", required: false }
