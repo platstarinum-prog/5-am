@@ -2,11 +2,10 @@ import { useState } from 'react';
 import ProductCatalog from '../components/ProductCatalog';
 import type { Product } from '../components/ProductCatalog';
 
-// Сканируем только НОВУЮ папку live_products. Старая папка products/ игнорируется сборщиком.
-// Используем allowEmpty: true, чтобы Vite не ругался, если папки еще нет физически в Git
-const modules = import.meta.glob('../data/live_products/*.json', { eager: true, allowEmpty: true });
+// Убираем allowEmpty, а чтобы TS не ругался на пустую папку во время сборки — кастуем результат к Record
+const modules = import.meta.glob('../data/live_products/*.json', { eager: true }) as Record<string, any>;
 
-// Превращаем импортированные модули в массив объектов товаров
+// Безопасно собираем массив. Если модулей нет, Object.values просто вернет пустой массив []
 const loadedProducts = Object.values(modules).map((mod: any) => {
   return mod.default ? mod.default : mod;
 }) as Product[];
@@ -33,7 +32,7 @@ export default function CatalogPage() {
           </div>
         </div>
       ) : (
-        // Если через админку создали товар — рендерим каталог
+        // Если товары добавлены — рендерим каталог
         <ProductCatalog products={products} />
       )}
     </div>
