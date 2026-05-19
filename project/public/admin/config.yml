@@ -1,8 +1,8 @@
 backend:
   name: git-gateway
-  branch: main # Переименуй в master, если основная ветка называется так
+  branch: main # Переименуй в master, если основная ветка репозитория называется так
 
-local_backend: true # Позволяет тестировать админку локально
+local_backend: true # Позволяет тестировать админку локально через прокси-сервер
 
 media_folder: "project/public/images/uploads"
 public_folder: "/images/uploads"
@@ -27,10 +27,18 @@ collections:
       - { label: "Описание (UA/EN)", name: "description_en", widget: "text", required: false }
       - { label: "В наличии", name: "inStock", widget: "boolean", default: true }
 
-  # 2. ФАЙЛЫ ДЛЯ ОТЗЫВОВ И FAQ
+  # 2. ФАЙЛЫ ДЛЯ ОТЗЫВОВ, FAQ И ГЛАВНОЙ СТРАНИЦЫ
   - name: "data_lists"
     label: "Списки и настройки"
     files:
+      - file: "project/src/data/home.json"
+        label: "Главная страница (Тексты)"
+        name: "home_page"
+        fields:
+          - { label: "Главный заголовок (Hero Title)", name: "heroTitle", widget: "string", default: "5AM STORE" }
+          - { label: "Подзаголовок (Hero Subtitle)", name: "heroSubtitle", widget: "text", default: "Преміальний дроп та аксесуари. Оновлення каталогу щотижня." }
+          - { label: "Текст кнопки (CTA Text)", name: "ctaText", widget: "string", default: "Перейти до каталогу" }
+
       - file: "project/src/data/reviews.json"
         label: "Отзывы клиентов"
         name: "reviews"
@@ -39,10 +47,9 @@ collections:
             label: "Список отзывов"
             widget: "list"
             fields:
-              - { label: "Имя автора", name: "name", widget: "string" }
+              - { label: "Имя автора", name: "author", widget: "string" }
+              - { label: "Что купил (Вещь)", name: "item", widget: "string" }
               - { label: "Отзыв (Текст)", name: "text", widget: "text" }
-              - { label: "Рейтинг (Звёзды)", name: "rating", widget: "number", min: 1, max: 5, default: 5 }
-              - { label: "Дата", name: "date", widget: "string", required: false }
 
       - file: "project/src/data/faq.json"
         label: "Часто задаваемые вопросы (FAQ)"
@@ -50,7 +57,6 @@ collections:
         fields:
           - name: "items"
             label: "Вопросы и ответы"
-            widget: "list"
             fields:
               - { label: "Вопрос (RU)", name: "question_ru", widget: "string" }
               - { label: "Ответ (RU)", name: "answer_ru", widget: "text" }
