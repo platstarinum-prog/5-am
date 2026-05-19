@@ -1,80 +1,58 @@
 backend:
   name: git-gateway
-  branch: main
+  branch: main # или master, смотря какая ветка в репозитории основная
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+local_backend: true # Чтобы тестировать локально
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+# Формат сохранения файлов по умолчанию
+format: "json"
 
 collections:
-  # 1. КАТАЛОГ ТОВАРІВ (FOLDER-КОЛЛЕКЦИЯ)
+  # 1. КОЛЛЕКЦИЯ ДЛЯ КАТАЛОГА ТОВАРОВ
   - name: "products"
-    label: "Каталог товарів"
-    folder: "src/data/products"
+    label: "Каталог товаров"
+    folder: "src/data/products" # Создаст файлы для каждого товара тут
     create: true
-    extension: "json"
-    format: "json"
-    slug: "{{fields.id}}"
-    summary: "{{fields.brand}} - {{fields.name}}"
+    slug: "{{slug}}"
     fields:
-      - { name: "id", label: "ID / Ім'я файлу (без .json)", widget: "string" }
-      - { name: "name", label: "Назва товару", widget: "string" }
-      - { name: "brand", label: "Бренд", widget: "string" }
-      - { name: "price", label: "Ціна (грн)", widget: "number", value_type: "int" }
-      - name: "category"
-        label: "Категорія"
-        widget: "select"
-        options: ["Одяг", "Взуття", "Аксесуари"]
-      - { name: "sizes", label: "Розміри", widget: "string" }
-      - name: "condition"
-        label: "Стан"
-        widget: "select"
-        options: ["Відмінний", "Б/У"]
-      - { name: "seller_tg", label: "Telegram менеджера (без @)", widget: "string" }
-      - { name: "imageUrl", label: "Фото товару", widget: "image" }
-      - { name: "sold", label: "Товар продано?", widget: "boolean", default: false }
+      - { label: "ID товара", name: "id", widget: "string" }
+      - { label: "Название (RU)", name: "title_ru", widget: "string" }
+      - { label: "Название (UA/EN)", name: "title_en", widget: "string", required: false }
+      - { label: "Цена", name: "price", widget: "number", value_type: "int" }
+      - { label: "Изображение товара", name: "image", widget: "image" }
+      - { label: "Описание (RU)", name: "description_ru", widget: "text" }
+      - { label: "Описание (UA/EN)", name: "description_en", widget: "text", required: false }
+      - { label: "В наличии", name: "inStock", widget: "boolean", default: true }
 
-  # 2. ГОЛОВНА СТОРІНКА (ОТДЕЛЬНАЯ КОЛЛЕКЦИЯ)
-  - name: "home_page_collection"
-    label: "Головна сторінка"
-    delete: false
+  # 2. ОДИН ФАЙЛ ДЛЯ ВСЕХ ОТЗЫВОВ И FAQ (Чтобы не плодить файлы)
+  - name: "data_lists"
+    label: "Списки и настройки"
     files:
-      - name: "home_page"
-        label: "Редагувати текст головної"
-        file: "public/data/home.json"
+      - file: "src/data/reviews.json"
+        label: "Отзывы клиентов"
+        name: "reviews"
         fields:
-          - { name: "heroTitle", label: "Головний заголовок", widget: "string" }
-          - { name: "heroSubtitle", label: "Підзаголовок сайту", widget: "text" }
-          - { name: "ctaText", label: "Текст кнопки", widget: "string" }
-
-  # 3. ВІДГУКИ (ОТДЕЛЬНАЯ КОЛЛЕКЦИЯ)
-  - name: "reviews_collection"
-    label: "Сторінка відгуків"
-    delete: false
-    files:
-      - name: "reviews_file"
-        label: "Список відгуків сайту"
-        file: "public/data/reviews.json"
-        fields:
-          - name: "reviews"
-            label: "Список відгуків"
+          - name: "items"
+            label: "Список отзывов"
             widget: "list"
             fields:
-              - { name: "author", label: "Ім'я", widget: "string" }
-              - { name: "item", label: "Товар", widget: "string" }
-              - { name: "text", label: "Відгук", widget: "text" }
+              - { label: "Имя автора", name: "name", widget: "string" }
+              - { label: "Отзыв (Текст)", name: "text", widget: "text" }
+              - { label: "Рейтинг (Звёзды)", name: "rating", widget: "number", min: 1, max: 5, default: 5 }
+              - { label: "Дата", name: "date", widget: "string", required: false }
 
-  # 4. FAQ (ОТДЕЛЬНАЯ КОЛЛЕКЦИЯ)
-  - name: "faq_collection"
-    label: "Сторінка FAQ"
-    delete: false
-    files:
-      - name: "faq_file"
-        label: "Список питань та відповідей"
-        file: "public/data/faq.json"
+      - file: "src/data/faq.json"
+        label: "Часто задаваемые вопросы (FAQ)"
+        name: "faq"
         fields:
-          - name: "faq"
-            label: "Список питань"
+          - name: "items"
+            label: "Вопросы и ответы"
             widget: "list"
             fields:
-              - { name: "question", label: "Питання", widget: "string" }
-              - { name: "answer", label: "Відповідь", widget: "text" }
+              - { label: "Вопрос (RU)", name: "question_ru", widget: "string" }
+              - { label: "Ответ (RU)", name: "answer_ru", widget: "text" }
+              - { label: "Вопрос (UA/EN)", name: "question_en", widget: "string", required: false }
+              - { label: "Ответ (UA/EN)", name: "answer_en", widget: "text", required: false }
