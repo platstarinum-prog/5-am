@@ -34,7 +34,7 @@ export default function Navbar() {
         </div>
 
         <a
-          href="https://t.me/5amstore"
+          href="https://t.me/store_5am"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-zinc-400 border border-zinc-800 rounded-md hover:border-zinc-600 hover:text-white transition-all"
