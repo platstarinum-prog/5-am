@@ -1,0 +1,19 @@
+{
+  "brand": "Murder License",
+  "price": 2999,
+  "name": "Джинсы Murder License",
+  "sizes": "+-S",
+  "seller_tg": "@htnv15",
+  "sold": false,
+  "images": [
+    "/images/uploads/photo_2026-03-17_10-44-06.jpg",
+    "/images/uploads/photo_2026-03-17_10-44-35.jpg",
+    "/images/uploads/photo_2026-03-17_10-44-39.jpg",
+    "/images/uploads/photo_2026-03-17_10-44-45.jpg",
+    "/images/uploads/photo_2026-03-17_10-44-50.jpg",
+    "/images/uploads/photo_2026-03-17_10-44-55.jpg"
+  ],
+  "id": "88",
+  "condition": "Відмінний",
+  "category": "Джинси"
+}
