@@ -1,0 +1,19 @@
+{
+  "brand": "Maison Mihara Yasuhiro ",
+  "price": 3999,
+  "name": "Maison Mihara Yasuhiro jacket",
+  "sizes": "М",
+  "seller_tg": "@htnv15",
+  "sold": false,
+  "images": [
+    "/images/uploads/photo_2026-04-24_23-04-33.jpg",
+    "/images/uploads/photo_2026-04-24_23-04-50.jpg",
+    "/images/uploads/photo_2026-04-24_23-04-43.jpg",
+    "/images/uploads/photo_2026-04-24_23-04-38.jpg",
+    "/images/uploads/photo_2026-04-24_23-04-54.jpg",
+    "/images/uploads/photo_2026-04-24_23-04-47.jpg"
+  ],
+  "id": "12",
+  "condition": "Новий",
+  "category": "Куртки"
+}
