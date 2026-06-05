@@ -1,39 +1,16 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
-import translations, { type Language, type TranslationKey } from './translations';
-
-interface LangContextType {
-  lang: Language;
-  setLang: (lang: Language) => void;
-  t: (key: TranslationKey, vars?: Record<string, string | number>) => string;
-  langs: Language[];
-}
-
-const LangContext = createContext<LangContextType | null>(null);
-
-const LANGS: Language[] = ['uk', 'ru', 'en'];
-
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Language>('uk');
-
-  const t = (key: TranslationKey, vars?: Record<string, string | number>) => {
-    let value = translations[lang]?.[key] ?? translations.uk[key] ?? key;
-    if (vars) {
-      for (const [k, v] of Object.entries(vars)) {
-        value = value.replace(`{${k}}`, String(v));
-      }
-    }
-    return value;
-  };
-
-  return (
-    <LangContext.Provider value={{ lang, setLang, t, langs: LANGS }}>
-      {children}
-    </LangContext.Provider>
-  );
-}
+import { useTranslation } from 'react-i18next';
+import type { TranslationKey } from './translations';
 
 export function useLang() {
-  const ctx = useContext(LangContext);
-  if (!ctx) throw new Error('useLang must be inside LanguageProvider');
-  return ctx;
+  const { t: i18nT, i18n } = useTranslation();
+
+  const t = (key: TranslationKey, vars?: Record<string, string | number>) => {
+    return i18nT(key, vars);
+  };
+
+  const lang = i18n.language as 'uk' | 'ru' | 'en';
+  const setLang = (l: string) => i18n.changeLanguage(l);
+  const langs = ['uk', 'ru', 'en'];
+
+  return { lang, setLang, t, langs };
 }
