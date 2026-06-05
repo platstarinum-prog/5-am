@@ -1,6 +1,8 @@
 import { useState, useMemo } from 'react';
 import ProductCatalog from '../components/ProductCatalog';
 import { type Product } from '../components/ProductCard';
+import { useLang } from '../i18n/LanguageContext';
+import SEO, { itemListSchema, breadcrumbSchema } from '../components/SEO';
 
 const modules = import.meta.glob('../data/products/*.json', { eager: true }) as Record<string, any>;
 
@@ -14,6 +16,7 @@ const loadedProducts: Product[] = Object.values(modules).map((mod: any) => {
 });
 
 export default function CatalogPage() {
+  const { t } = useLang();
   const [products] = useState<Product[]>(loadedProducts);
   const [activeCat, setActiveCat] = useState('Всі');
 
@@ -27,24 +30,35 @@ export default function CatalogPage() {
   }, [activeCat, products]);
 
   return (
-    <div className="max-w-screen-xl mx-auto px-6 pt-24 pb-16">
-      <div className="mb-12">
-        <h1 className="text-white font-black text-5xl uppercase mb-8">Колекція</h1>
-        <div className="flex flex-wrap gap-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCat(cat)}
-              className={`px-4 py-2 border text-xs uppercase transition-all ${
-                activeCat === cat ? 'bg-white text-black' : 'border-zinc-900 text-zinc-500 hover:border-white'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+    <>
+      <SEO
+        title={t('catalog.title')}
+        description={t('home.subtitle')}
+        path="/catalog"
+        jsonLd={itemListSchema(filteredProducts.map(p => ({
+          name: p.name,
+          url: `/catalog/${p.id}`,
+        })))}
+      />
+      <div className="max-w-screen-xl mx-auto px-6 pt-24 pb-16">
+        <div className="mb-12">
+          <h1 className="text-white font-black text-5xl uppercase mb-8">{t('catalog.title')}</h1>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCat(cat)}
+                className={`px-4 py-2 border text-xs uppercase transition-all ${
+                  activeCat === cat ? 'bg-white text-black' : 'border-zinc-900 text-zinc-500 hover:border-white'
+                }`}
+              >
+                {cat === 'Всі' ? t('catalog.all') : cat}
+              </button>
+            ))}
+          </div>
         </div>
+        <ProductCatalog products={filteredProducts} />
       </div>
-      <ProductCatalog products={filteredProducts} />
-    </div>
+    </>
   );
 }

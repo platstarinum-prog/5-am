@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLang } from '../i18n/LanguageContext';
 
 export interface FaqItem {
   question: string;
@@ -11,22 +12,21 @@ interface FAQProps {
 
 export default function FAQ({ items = [] }: FAQProps) {
   const [open, setOpen] = useState<number | null>(0);
+  const { t } = useLang();
 
   return (
     <div className="bg-black text-white min-h-screen py-24 px-6 selection:bg-white selection:text-black">
       <div className="max-w-2xl mx-auto">
         
-        {/* Шапка FAQ в агрессивном минимализме */}
         <div className="mb-12">
           <p className="text-zinc-600 font-mono text-xs tracking-[0.2em] uppercase mb-3">
-            ПИТАННЯ
+            {t('faq.title')}
           </p>
           <h1 className="text-white font-black text-5xl md:text-6xl tracking-tight leading-none uppercase">
-            FAQ
+            {t('faq.heading')}
           </h1>
         </div>
 
-        {/* Список вопросов */}
         <div className="flex flex-col gap-2">
           {items && items.length > 0 ? (
             items.map((item, i) => (
@@ -65,7 +65,7 @@ export default function FAQ({ items = [] }: FAQProps) {
             ))
           ) : (
             <p className="text-zinc-600 text-xs font-mono tracking-wider py-6">
-              [ Питань поки немає. Додайте їх через панель керування ]
+              [{t('faq.empty')}]
             </p>
           )}
         </div>

@@ -1,13 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
-
-const NAV_ITEMS = [
-  { label: 'Каталог', href: '/catalog' },
-  { label: 'Відгуки', href: '/reviews' },
-  { label: 'FAQ', href: '/faq' },
-];
+import { useLang } from '../i18n/LanguageContext';
+import LangSwitch from './LangSwitch';
 
 export default function Navbar() {
   const { pathname } = useLocation();
+  const { t } = useLang();
+
+  const NAV_ITEMS = [
+    { label: t('nav.catalog'), href: '/catalog' },
+    { label: t('nav.reviews'), href: '/reviews' },
+    { label: t('nav.faq'), href: '/faq' },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/60 bg-black/90 backdrop-blur-sm">
@@ -33,17 +36,20 @@ export default function Navbar() {
           ))}
         </div>
 
-        <a
-          href="https://t.me/store_5am"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-zinc-400 border border-zinc-800 rounded-md hover:border-zinc-600 hover:text-white transition-all"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.069l-2.03 9.561c-.148.667-.54.833-1.092.518l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.16 14.26l-2.96-.924c-.643-.202-.657-.643.136-.953l11.57-4.462c.537-.194 1.006.131.656.148z"/>
-          </svg>
-          TG
-        </a>
+        <div className="flex items-center gap-2">
+          <LangSwitch />
+          <a
+            href="https://t.me/store_5am"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-zinc-400 border border-zinc-800 rounded-md hover:border-zinc-600 hover:text-white transition-all"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.069l-2.03 9.561c-.148.667-.54.833-1.092.518l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.16 14.26l-2.96-.924c-.643-.202-.657-.643.136-.953l11.57-4.462c.537-.194 1.006.131.656.148z"/>
+            </svg>
+            {t('nav.telegram')}
+          </a>
+        </div>
       </div>
 
       <div className="md:hidden flex gap-1 px-6 pb-3 overflow-x-auto">

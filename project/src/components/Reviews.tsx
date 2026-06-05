@@ -1,3 +1,5 @@
+import { useLang } from '../i18n/LanguageContext';
+
 export interface Review {
   text: string;
   author: string;
@@ -11,15 +13,17 @@ interface Props {
 const STARS = [1, 2, 3, 4, 5];
 
 export default function Reviews({ reviews }: Props) {
+  const { t } = useLang();
+
   return (
     <div>
       <div className="mb-10">
-        <p className="text-zinc-600 font-mono text-xs tracking-widest uppercase mb-3">ВІДГУКИ</p>
+        <p className="text-zinc-600 font-mono text-xs tracking-widest uppercase mb-3">{t('reviews.title')}</p>
         <div className="flex items-baseline gap-4">
           <h1 className="text-white font-black text-5xl md:text-6xl tracking-tight leading-none">
-            Що кажуть
+            {t('reviews.heading')}
           </h1>
-          <span className="text-zinc-600 font-mono text-sm">{reviews.length} відгуків</span>
+          <span className="text-zinc-600 font-mono text-sm">{t('reviews.count', { count: reviews.length })}</span>
         </div>
       </div>
 
