@@ -32,14 +32,21 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-16 pt-8 border-t border-zinc-900">
           <p className="text-zinc-700 font-mono text-[10px] uppercase tracking-widest">© {year} 5AM Store. All rights reserved.</p>
-          <a
-            href="https://krvtsv.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-rose-600 hover:bg-rose-500 text-black font-bold text-xs uppercase tracking-widest transition-all hover:scale-105"
-          >
-            Сайт зроблений KRVTSV CORP
-          </a>
+          <div className="relative overflow-hidden rounded-full px-5 py-2.5 bg-white shadow-lg">
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute -top-4 -right-3 w-16 h-16 bg-rose-300/50 rounded-full blur-xl" />
+              <div className="absolute -bottom-4 -left-3 w-12 h-12 bg-rose-400/40 rounded-full blur-lg" />
+              <div className="absolute top-1/4 left-1/3 w-8 h-8 bg-rose-200/30 rounded-full blur-md" />
+            </div>
+            <a
+              href="https://krvtsv.netlify.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative block text-rose-600 font-bold text-[10px] uppercase tracking-widest hover:text-rose-500 transition-colors"
+            >
+              Сайт зроблений KRVTSV CORP
+            </a>
+          </div>
           <p className="text-zinc-800 font-mono text-[10px] uppercase tracking-widest">Est. 2024 — Kyiv, Ukraine</p>
         </div>
 
