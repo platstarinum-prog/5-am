@@ -1,6 +1,6 @@
 backend:
   name: git-gateway
-  repo: platstarinum-prog/reseil-dalbayoba
+  repo: platstarinum-prog/5-am
   branch: main
 media_folder: "project/public/images/uploads"
 public_folder: "/images/uploads"
