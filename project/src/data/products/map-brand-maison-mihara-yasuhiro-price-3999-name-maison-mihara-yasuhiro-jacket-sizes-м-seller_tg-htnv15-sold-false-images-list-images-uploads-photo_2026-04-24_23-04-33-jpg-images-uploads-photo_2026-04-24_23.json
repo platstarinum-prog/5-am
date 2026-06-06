@@ -15,5 +15,11 @@
   ],
   "id": "12",
   "condition": "Новий",
-  "category": "Куртки"
+  "category": "Куртки",
+  "category_ru": "Куртки",
+  "category_en": "Jackets",
+  "name_ru": "Maison Mihara Yasuhiro jacket",
+  "name_en": "Maison Mihara Yasuhiro jacket",
+  "condition_ru": "Новый",
+  "condition_en": "New"
 }

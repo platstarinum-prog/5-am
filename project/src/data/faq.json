@@ -2,9 +2,11 @@
   "faq": {
     "items": [
       {
+        "question": "Які терміни доставки?",
         "question_ru": "Каковы сроки доставки?",
-        "answer_ru": "Доставка занимает от 1 до 3 рабочих дней.",
         "question_en": "What are the delivery times?",
+        "answer": "Доставка займає від 1 до 3 робочих днів.",
+        "answer_ru": "Доставка занимает от 1 до 3 рабочих дней.",
         "answer_en": "Delivery takes 1 to 3 business days."
       }
     ]

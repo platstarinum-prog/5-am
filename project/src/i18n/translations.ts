@@ -6,7 +6,7 @@ export type TranslationKey =
   | 'footer.tagline' | 'footer.title' | 'footer.desc'
   | 'footer.nav' | 'footer.catalog' | 'footer.reviews' | 'footer.faq'
   | 'footer.contact' | 'footer.copyright' | 'footer.est' | 'footer.made_by'
-  | 'catalog.title' | 'catalog.all' | 'catalog.back'
+  | 'catalog.title' | 'catalog.all' | 'catalog.back' | 'catalog.empty'
   | 'product.not_found' | 'product.back'
   | 'product.condition' | 'product.size' | 'product.category'
   | 'product.sold' | 'product.buy' | 'product.uah'
@@ -39,6 +39,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     'catalog.title': 'Колекція',
     'catalog.all': 'Всі',
     'catalog.back': '← Каталог',
+    'catalog.empty': 'Товарів поки немає.',
     'product.not_found': 'Товар не знайдено',
     'product.back': '← Повернутись',
     'product.condition': 'Стан',
@@ -82,6 +83,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     'catalog.title': 'Коллекция',
     'catalog.all': 'Все',
     'catalog.back': '← Каталог',
+    'catalog.empty': 'Товаров пока нет.',
     'product.not_found': 'Товар не найден',
     'product.back': '← Вернуться',
     'product.condition': 'Состояние',
@@ -125,6 +127,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
     'catalog.title': 'Collection',
     'catalog.all': 'All',
     'catalog.back': '← Catalog',
+    'catalog.empty': 'No products yet.',
     'product.not_found': 'Product not found',
     'product.back': '← Go back',
     'product.condition': 'Condition',

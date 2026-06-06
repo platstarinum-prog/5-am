@@ -4,7 +4,7 @@ import { useLang } from '../i18n/LanguageContext';
 import SEO, { orgSchema } from '../components/SEO';
 
 export default function HomePage() {
-  const { t } = useLang();
+  const { t, loc } = useLang();
   const content = (homeData as any)?.home_page ?? homeData ?? {};
 
   return (
@@ -20,16 +20,16 @@ export default function HomePage() {
             {t('home.welcome')}
           </p>
           <h1 className="text-white font-black text-5xl md:text-8xl tracking-tighter uppercase leading-none mb-6">
-            {content.heroTitle || t('home.title')}
+            {loc(content, 'heroTitle') || t('home.title')}
           </h1>
           <p className="text-zinc-400 text-sm md:text-base font-medium max-w-md mx-auto mb-10 leading-relaxed">
-            {content.heroSubtitle || t('home.subtitle')}
+            {loc(content, 'heroSubtitle') || t('home.subtitle')}
           </p>
           <Link
             to="/catalog"
             className="inline-block bg-white text-black text-xs md:text-sm font-bold uppercase tracking-widest px-8 py-4 rounded-xl hover:bg-zinc-200 transition-all duration-300 transform hover:-translate-y-0.5"
           >
-            {content.ctaText || t('home.cta')}
+            {loc(content, 'ctaText') || t('home.cta')}
           </Link>
         </div>
       </div>

@@ -2,6 +2,8 @@
   "brand": "Murder License",
   "price": 2999,
   "name": "Джинсы Murder License",
+  "name_ru": "Джинсы Murder License",
+  "name_en": "Murder License Jeans",
   "sizes": "+-S",
   "seller_tg": "@htnv15",
   "sold": false,
@@ -15,5 +17,9 @@
   ],
   "id": "88",
   "condition": "Відмінний",
-  "category": "Джинси"
+  "category": "Джинси",
+  "category_ru": "Джинсы",
+  "category_en": "Jeans",
+  "condition_ru": "Отличный",
+  "condition_en": "Distinctive"
 }

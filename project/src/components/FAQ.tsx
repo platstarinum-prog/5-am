@@ -12,12 +12,12 @@ interface FAQProps {
 
 export default function FAQ({ items = [] }: FAQProps) {
   const [open, setOpen] = useState<number | null>(0);
-  const { t } = useLang();
+  const { t, loc } = useLang();
 
   return (
     <div className="bg-black text-white min-h-screen py-24 px-6 selection:bg-white selection:text-black">
       <div className="max-w-2xl mx-auto">
-        
+
         <div className="mb-12">
           <p className="text-zinc-600 font-mono text-xs tracking-[0.2em] uppercase mb-3">
             {t('faq.title')}
@@ -30,8 +30,8 @@ export default function FAQ({ items = [] }: FAQProps) {
         <div className="flex flex-col gap-2">
           {items && items.length > 0 ? (
             items.map((item, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="border border-zinc-900 rounded-xl overflow-hidden bg-zinc-950/40 backdrop-blur-sm transition-all duration-300"
               >
                 <button
@@ -41,11 +41,11 @@ export default function FAQ({ items = [] }: FAQProps) {
                   <span className={`text-sm font-semibold tracking-wide transition-colors duration-200 ${
                     open === i ? 'text-white' : 'text-zinc-400 group-hover:text-zinc-200'
                   }`}>
-                    {item.question}
+                    {loc(item as any, 'question')}
                   </span>
                   <span className={`shrink-0 w-7 h-7 flex items-center justify-center rounded-full border transition-all duration-300 ${
-                    open === i 
-                      ? 'border-white text-white rotate-45 bg-white/5' 
+                    open === i
+                      ? 'border-white text-white rotate-45 bg-white/5'
                       : 'border-zinc-800 text-zinc-600 group-hover:border-zinc-700'
                   }`}>
                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -58,7 +58,7 @@ export default function FAQ({ items = [] }: FAQProps) {
                   open === i ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
                 }`}>
                   <p className="px-5 pb-5 text-zinc-400 text-sm leading-relaxed border-t border-zinc-900/50 pt-4 font-normal">
-                    {item.answer}
+                    {loc(item as any, 'answer')}
                   </p>
                 </div>
               </div>

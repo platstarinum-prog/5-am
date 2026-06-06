@@ -14,5 +14,11 @@
   ],
   "id": "9",
   "condition": "Хороший",
-  "category": "Взуття"
+  "category": "Взуття",
+  "category_ru": "Обувь",
+  "category_en": "Shoes",
+  "name_ru": "Maison Margiela Lether patterned",
+  "name_en": "Maison Margiela Leather patterned",
+  "condition_ru": "Хороший",
+  "condition_en": "Good"
 }

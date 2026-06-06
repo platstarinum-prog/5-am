@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run translate && tsc -b && vite build",
+    "translate": "node scripts/translate.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
+    "@vitalets/google-translate-api": "^9.2.1",
+    "glob": "^13.0.6",
     "i18next": "^26.3.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",

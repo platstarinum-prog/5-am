@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLang } from '../i18n/LanguageContext';
-import SEO, { productSchema, breadcrumbSchema } from '../components/SEO';
+import SEO, { productSchema } from '../components/SEO';
+import type { TranslationKey } from '../i18n/translations';
 
 interface Product {
   id: string;
@@ -23,17 +24,17 @@ const allProducts: Product[] = Object.values(modules).map((mod: any) => {
   return { ...data, id: data.id ?? Math.random().toString(36).slice(2) };
 });
 
-const conditionLabel: Record<string, string> = {
-  'Новий': 'Новий',
-  'Відмінний': 'Відмінний',
-  'Хороший': 'Хороший',
-  'Б/У': 'Б/У',
+const COND_KEY_MAP: Record<string, TranslationKey> = {
+  'Новий': 'product.new',
+  'Відмінний': 'product.excellent',
+  'Хороший': 'product.good',
+  'Б/У': 'product.used',
 };
 
 export default function ProductPage() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { t } = useLang();
+  const { t, loc } = useLang();
   const product = allProducts.find(p => p.id === id);
   const [activeImg, setActiveImg] = useState(0);
 
@@ -49,26 +50,30 @@ export default function ProductPage() {
     );
   }
 
-  const name = product.name;
-  const brand = product.brand;
+  const name = loc(product, 'name');
+  const brand = loc(product, 'brand');
   const price = product.price;
-  const sizes = product.sizes;
+  const sizes = loc(product, 'sizes');
   const images: string[] = Array.isArray(product.images) ? product.images : [];
   const seller_tg = product.seller_tg;
   const condition = product.condition;
   const sold = product.sold;
-  const description = product.description;
-  const category = product.category;
+  const description = loc(product, 'description');
+  const category = loc(product, 'category');
 
   const rawUsername = (seller_tg ?? '').toString().trim().replace(/^@/, '');
   const username = rawUsername || '5am_store_official';
   const telegramUrl = 'https://t.me/' + username;
 
+  const conditionDisplay = condition
+    ? (t as (key: string) => string)(COND_KEY_MAP[condition] ?? condition)
+    : '';
+
   return (
     <>
       <SEO
         title={name}
-        description={`${brand} ${name} — ${price} грн. ${description || ''}`.slice(0, 200)}
+        description={`${brand} ${name} — ${price} ${t('product.uah')}. ${description || ''}`.slice(0, 200)}
         path={`/catalog/${product.id}`}
         jsonLd={productSchema({ name, price, brand: brand || '5AM', category: category || '', images, sizes, description: description || undefined, condition, sold })}
       />
@@ -113,7 +118,7 @@ export default function ProductPage() {
               {condition && (
                 <div className="flex items-center justify-between border border-zinc-800 px-4 py-3 rounded-lg">
                   <span className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">{t('product.condition')}</span>
-                  <span className="text-white text-xs font-medium">{conditionLabel[condition] ?? condition}</span>
+                  <span className="text-white text-xs font-medium">{conditionDisplay}</span>
                 </div>
               )}
               {sizes && (

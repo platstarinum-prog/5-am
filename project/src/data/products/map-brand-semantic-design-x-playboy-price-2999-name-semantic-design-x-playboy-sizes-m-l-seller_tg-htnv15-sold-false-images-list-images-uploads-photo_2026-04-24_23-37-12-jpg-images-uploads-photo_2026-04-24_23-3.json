@@ -14,5 +14,11 @@
   ],
   "id": "13",
   "condition": "Відмінний",
-  "category": "Світшоти"
+  "category": "Світшоти",
+  "category_ru": "Свитшоты",
+  "category_en": "Sweatshirts",
+  "name_ru": "Semantic design x PLAYBOY",
+  "name_en": "Semantic design x PLAYBOY",
+  "condition_ru": "Отличный",
+  "condition_en": "Distinctive"
 }

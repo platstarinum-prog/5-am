@@ -2,6 +2,8 @@
   "brand": "A-COLD-WALL*",
   "price": 2499,
   "name": "Лонгслив A-COLD-WALL*",
+  "name_ru": "Лонгслив A-COLD-WALL*",
+  "name_en": "A-COLD-WALL* Longsleeve",
   "sizes": "L",
   "seller_tg": "@htnv15",
   "sold": false,
@@ -16,5 +18,9 @@
   ],
   "id": "78",
   "condition": "Хороший",
-  "category": "Лонги"
+  "category": "Лонги",
+  "category_ru": "Лонгсливы",
+  "category_en": "Longsleeves",
+  "condition_ru": "Хороший",
+  "condition_en": "Good"
 }

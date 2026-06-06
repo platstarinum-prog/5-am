@@ -13,5 +13,11 @@
   ],
   "id": "57",
   "condition": "Відмінний",
-  "category": "Зіпки"
+  "category": "Зіпки",
+  "category_ru": "Зипки",
+  "category_en": "Zip-ups",
+  "name_ru": "Number Nine quaterzip",
+  "name_en": "Number Nine quaterzip",
+  "condition_ru": "Отличный",
+  "condition_en": "Distinctive"
 }

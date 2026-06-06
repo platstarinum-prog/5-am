@@ -1,4 +1,8 @@
 {
   "question": "Звідки привозите речі?",
-  "answer": "Привозимо з усього світу, в основному з Європи та Японії."
+  "question_ru": "Откуда привозите вещи?",
+  "question_en": "Where do you source items from?",
+  "answer": "Привозимо з усього світу, в основному з Європи та Японії.",
+  "answer_ru": "Привозим со всего мира, в основном из Европы и Японии.",
+  "answer_en": "We source from all over the world, mainly from Europe and Japan."
 }

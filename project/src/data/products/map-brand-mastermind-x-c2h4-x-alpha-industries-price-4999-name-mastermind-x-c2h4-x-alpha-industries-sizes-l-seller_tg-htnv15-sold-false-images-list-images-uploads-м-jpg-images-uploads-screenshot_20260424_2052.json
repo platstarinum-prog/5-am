@@ -17,5 +17,11 @@
   ],
   "id": "51",
   "condition": "Відмінний",
-  "category": "Худі"
+  "category": "Худі",
+  "category_ru": "Худи",
+  "category_en": "Hoodies",
+  "name_ru": "Mastermind x C2H4 x Alpha Industries",
+  "name_en": "Mastermind x C2H4 x Alpha Industries",
+  "condition_ru": "Отличный",
+  "condition_en": "Distinctive"
 }

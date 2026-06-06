@@ -1,5 +1,11 @@
 {
   "heroTitle": "5AM STORE",
+  "heroTitle_ru": "5AM STORE",
+  "heroTitle_en": "5AM STORE",
   "heroSubtitle": "Доставка речей з усього світу. Тільки оригінал",
-  "ctaText": "Перейти до каталогу"
+  "heroSubtitle_ru": "Доставка вещей со всего мира. Только оригинал",
+  "heroSubtitle_en": "Worldwide delivery. Only authentic items.",
+  "ctaText": "Перейти до каталогу",
+  "ctaText_ru": "Перейти в каталог",
+  "ctaText_en": "Go to catalog"
 }

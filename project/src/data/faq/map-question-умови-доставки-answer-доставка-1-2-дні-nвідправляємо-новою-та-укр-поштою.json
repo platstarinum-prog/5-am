@@ -1,4 +1,8 @@
 {
   "question": "Умови доставки",
-  "answer": "Доставка 1-2 дні\nВідправляємо Новою та Укр поштою"
+  "question_ru": "Условия доставки",
+  "question_en": "Delivery terms",
+  "answer": "Доставка 1-2 дні\nВідправляємо Новою та Укр поштою",
+  "answer_ru": "Доставка 1-2 дня\nОтправляем Новой Почтой и Укр Почтой",
+  "answer_en": "Delivery 1-2 days\nWe ship via Nova Poshta and Ukr Poshta"
 }

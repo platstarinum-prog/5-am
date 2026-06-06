@@ -2,6 +2,8 @@
   "brand": "Hysteric Glamour",
   "price": 3999,
   "name": "Лонгслив Hysteric Glamour",
+  "name_ru": "Лонгслив Hysteric Glamour",
+  "name_en": "Hysteric Glamour Longsleeve",
   "sizes": "M",
   "seller_tg": "@htnv15",
   "sold": false,
@@ -16,5 +18,9 @@
   ],
   "id": "333",
   "condition": "Відмінний",
-  "category": "Лонги"
+  "category": "Лонги",
+  "category_ru": "Лонгсливы",
+  "category_en": "Longsleeves",
+  "condition_ru": "Отличный",
+  "condition_en": "Distinctive"
 }

@@ -1,4 +1,8 @@
 {
   "question": "Стан речей",
-  "answer": "Всі речі які ми продаємо, або повністю нові або не меньше 8/10."
+  "question_ru": "Состояние вещей",
+  "question_en": "Condition of items",
+  "answer": "Всі речі які ми продаємо, або повністю нові або не менше 8/10.",
+  "answer_ru": "Все вещи которые мы продаем, либо полностью новые, либо не меньше 8/10.",
+  "answer_en": "All items we sell are either brand new or at least 8/10 condition."
 }

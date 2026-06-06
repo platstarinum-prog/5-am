@@ -4,6 +4,8 @@ import { type Product } from '../components/ProductCard';
 import { useLang } from '../i18n/LanguageContext';
 import SEO, { itemListSchema, breadcrumbSchema } from '../components/SEO';
 
+const ALL_CAT = '__all__';
+
 const modules = import.meta.glob('../data/products/*.json', { eager: true }) as Record<string, any>;
 
 const loadedProducts: Product[] = Object.values(modules).map((mod: any) => {
@@ -16,18 +18,25 @@ const loadedProducts: Product[] = Object.values(modules).map((mod: any) => {
 });
 
 export default function CatalogPage() {
-  const { t } = useLang();
+  const { t, loc } = useLang();
   const [products] = useState<Product[]>(loadedProducts);
-  const [activeCat, setActiveCat] = useState('Всі');
+  const [activeCat, setActiveCat] = useState(ALL_CAT);
 
   const categories = useMemo(() => {
     const catsFromData = Array.from(new Set(products.map(p => p.category)));
-    return ['Всі', ...catsFromData.sort()];
+    return [ALL_CAT, ...catsFromData.sort()];
   }, [products]);
 
   const filteredProducts = useMemo(() => {
-    return activeCat === 'Всі' ? products : products.filter(p => p.category === activeCat);
+    return activeCat === ALL_CAT ? products : products.filter(p => p.category === activeCat);
   }, [activeCat, products]);
+
+  const displayCategory = (cat: string) => {
+    if (cat === ALL_CAT) return t('catalog.all');
+    const product = products.find(p => p.category === cat);
+    if (!product) return cat;
+    return loc(product, 'category') || cat;
+  };
 
   return (
     <>
@@ -36,7 +45,7 @@ export default function CatalogPage() {
         description={t('home.subtitle')}
         path="/catalog"
         jsonLd={itemListSchema(filteredProducts.map(p => ({
-          name: p.name,
+          name: loc(p, 'name'),
           url: `/catalog/${p.id}`,
         })))}
       />
@@ -52,7 +61,7 @@ export default function CatalogPage() {
                   activeCat === cat ? 'bg-white text-black' : 'border-zinc-900 text-zinc-500 hover:border-white'
                 }`}
               >
-                {cat === 'Всі' ? t('catalog.all') : cat}
+                {displayCategory(cat)}
               </button>
             ))}
           </div>

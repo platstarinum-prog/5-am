@@ -18,5 +18,10 @@
   ],
   "id": "34",
   "condition": "Новий",
-  "category": "Взуття"
+  "category": "Взуття",
+  "category_ru": "Обувь",
+  "category_en": "Shoes",
+  "name_ru": "Maison Margiela high trainers",
+  "condition_ru": "Новый",
+  "condition_en": "New"
 }
